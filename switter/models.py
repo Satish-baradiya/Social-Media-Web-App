@@ -9,7 +9,8 @@ class Profile(models.Model):
     follows = models.ManyToManyField(
         "self",
         related_name="followed_by",
-        blank=True
+        blank=True,
+        symmetrical=False
     )
 
     def __str__(self):
