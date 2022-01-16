@@ -1,0 +1,26 @@
+<ul>
+    {% for following in profile.follows.all %}
+    <li>
+        <a href="{% url 'profile' following.id %}">
+            {{ following }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+<ul>
+    {% for follower in profile.followed_by.all %}
+    <li>
+        <a href="{% url 'profile' follower.id %}">
+        {{ follower }}
+
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+<div class="block">
+    <a href="{% url 'profile_list' %}">
+        <button class="button is-dark is-outlined is-fullwidth">
+            All Profiles 
+        </button>
+    </a>
+</div>

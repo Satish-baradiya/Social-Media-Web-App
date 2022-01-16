@@ -12,3 +12,9 @@ def profile_list(request):
     return render(request,"switter/profile_list.html",{
         "profiles":profiles
     })
+
+def profile(request,pk):
+    profile = Profile.objects.get(pk=pk)
+    return render(request,"switter/profile.html",{
+        "profile":profile
+    })
