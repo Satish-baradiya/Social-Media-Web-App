@@ -6,6 +6,20 @@
             {{ profile.user.username|upper }}'s Sweets
         </h1>
     </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="button has-addons">
+            {% if profile in user.profile.follows.all %}
+            <button class="button is-success is-static ">Follow</button>
+            <button class="button is-danger" name="unfollow" value="unfollow">Unfollow</button>
+            {% else %}
+            <button class="button is-success" name="follow" value="follow">Follow</button>
+            <button class="button is-danger is-static ">Unfollow</button>
+            {% endif %}
+        </div>
+
+    </form>
+
 </div>
 <div class="column is-one-third">
     <div class="block">
@@ -15,39 +29,39 @@
             </button>
         </a>
     </div>
+</div>
+<div class="block">
+    <h3 class="title is-4">
+        {{ profile.user.username }} follows:
+    </h3>
+</div>
 
-    <div class="block">
-        <h3 class="title is-4">
-            {{ profile.user.username }} follows:
-        </h3>
-    </div>
-
+<div class="content">
+    <ul>
+        {% for following in profile.follows.all %}
+        <li>
+            <a href="{% url 'profile' following.id %}">
+                {{ following }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+</div>
+<div class="block">
+    <h3 class="title is-4">
+        {{ profile.user.username }} is followed by:
+    </h3>
     <div class="content">
         <ul>
-            {% for following in profile.follows.all %}
+            {% for follower in profile.followed_by.all %}
             <li>
-                <a href="{% url 'profile' following.id %}">
-                    {{ following }}
+                <a href="{% url 'profile' follower.id %}">
+                    {{ follower }}
                 </a>
             </li>
             {% endfor %}
         </ul>
     </div>
 </div>
- <div class="block">
-     <h3 class="title is-4">
-         {{ profile.user.username }} is followed by:
-     </h3>
-     <div class="content">
-         <ul>
-             {% for follower in profile.followed_by.all %}
-             <li>
-                 <a href="{% url 'profile' follower.id %}">
-                     {{ follower }}
-                 </a>
-             </li>
-             {% endfor %}
-         </ul>
-     </div>
- </div>
 {% endblock content %}
