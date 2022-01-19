@@ -5,8 +5,7 @@ from django.contrib.auth.models import Group, User
 from django.db.models.signals import post_save
 from django.db.models import fields
 # Register your models here.
-from . models import Profile
-
+from . models import Profile, Sweet
 class ProfileInline(admin.StackedInline):
     model = Profile
 
@@ -15,7 +14,7 @@ class UserAdmin(admin.ModelAdmin):
     fields = ['username']
     inlines  = [ProfileInline]
 
-
+admin.site.register(Sweet)
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.unregister(Group)
