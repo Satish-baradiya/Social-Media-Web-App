@@ -1,6 +1,8 @@
 import profile
-from django.shortcuts import render
-from .models import Profile
+from django.shortcuts import redirect, render
+
+from switter.forms import SweetForm
+from .models import Profile,Sweet
 # Create your views here.
 
 
@@ -28,5 +30,20 @@ def profile(request, pk):
         current_user_profile.save()
 
     return render(request, "switter/profile.html", {
-        "profile": profile
+        "profile": profile,
     })
+
+def dashboard(request):
+    if request.method == "POST":
+        form = SweetForm(request.POST)
+        if form.is_valid():
+            sweet = form.save(commit=False)
+            sweet.user = request.user
+            sweet.save()
+            return redirect("dashboard")
+    form = SweetForm()
+    return render(request,"switter/dashboard.html",{
+        "form":form
+    })
+    
+

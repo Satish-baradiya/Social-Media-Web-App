@@ -21,6 +21,17 @@
     </form>
 
 </div>
+<div class="content">
+    {% for sweet in profile.user.sweets.all %}
+    <div class="box">
+        {{ sweet.body }}
+        <span class="is-small has-text-grey-light">
+            ({{ sweet.created_at }})
+        </span>
+    </div>
+    {% endfor %}
+
+</div>
 <div class="column is-one-third">
     <div class="block">
         <a href="{% url 'profile_list' %}">
@@ -47,7 +58,6 @@
         {% endfor %}
     </ul>
 </div>
-</div>
 <div class="block">
     <h3 class="title is-4">
         {{ profile.user.username }} is followed by:
@@ -64,4 +74,5 @@
         </ul>
     </div>
 </div>
+
 {% endblock content %}

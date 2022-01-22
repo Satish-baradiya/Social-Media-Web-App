@@ -11,6 +11,7 @@
         <title>Switter</title>
     </head>
 <body>
+    <a href="{% url 'dashboard' %}">
     <section class="hero is-small is-success mb-4">
         <div class="hero-body">
             <h1 class="title is-1">Switter</h1>
@@ -19,6 +20,7 @@
         </div>
         
     </section>
+    </a>
     <div class="container">
         <div class="columns">
             {% block content %}
